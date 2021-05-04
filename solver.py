@@ -23,9 +23,18 @@ class Solver:
         box_nums = [
             self.game_board[r][c] for r in box_row_indexes for c in box_col_indexes
         ]
-
         return True if num not in box_nums else False
+
+    def is_move_viable(self, row_idx, col_idx, num):
+        return (
+            self.is_row_viable(row_idx, num)
+            and self.is_col_viable(col_idx, num)
+            and self.is_box_viable(row_idx, col_idx, num)
+        )
+
+    def solve(self):
+        pass
 
 
 s = Solver(starting_board_2d)
-print(s.is_box_viable(1, 1, 1))
+print(s.is_move_viable(1, 1, 2))
