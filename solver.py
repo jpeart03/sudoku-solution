@@ -1,9 +1,10 @@
+import pprint
 from board import solution_board_2d, starting_board_2d
 
 
 class Solver:
     def __init__(self, new_puzzle):
-        self.game_board = new_puzzle
+        self.game_board = new_puzzle.copy()
         # Dictionary to help with box indexes of 2d array:
         # - the key represents the result of idx in question // 3
         # - the values represent the idx that have the same result i.e. the "box"
@@ -33,8 +34,27 @@ class Solver:
         )
 
     def solve(self):
-        pass
+        # loop through each row
+        for row_idx in range(9):
+            # loop through each col in that row
+            for col_idx in range(9):
+                # make sure we're only editing open cells (0's)
+                if self.game_board[row_idx][col_idx] == 0:
+                    # brute force try possible numbers 1 - 9
+                    for num in range(1, 10):
+                        # check if move is viable
+                        if self.is_move_viable(row_idx, col_idx, num):
+                            self.game_board[row_idx][col_idx] = num
+                            self.solve()
+                            self.game_board[row_idx][
+                                col_idx
+                            ] = 0  # set after backtracking
+                    return  # if we got here no numbers worked, so return backtrack to previous solve call
+        pprint.pprint(
+            self.game_board
+        )  # finished iterating through board. Print completed board
 
 
-s = Solver(starting_board_2d)
-print(s.is_move_viable(1, 1, 2))
+if __name__ == "__main__":
+    s = Solver(starting_board_2d)
+    s.solve()
