@@ -1,4 +1,4 @@
-# sudoku-solution
+# sudoku solver
 Cindy, Deb, Jess, Jim Sudoku Solution
 
 wikipedia article: https://en.wikipedia.org/wiki/Sudoku
