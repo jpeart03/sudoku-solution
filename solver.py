@@ -33,6 +33,7 @@ class Solver:
             and self.is_box_viable(row_idx, col_idx, num)
         )
 
+    # TODO: pass row num to avoid excessive iterations
     def solve(self):
         # loop through each row
         for row_idx in range(9):
